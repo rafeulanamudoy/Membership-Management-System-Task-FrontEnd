@@ -28,3 +28,10 @@ export type ISignUpData = {
 
   confirmPassword?: string;
 };
+export type ISignInData = {
+  email: string;
+
+  role: ENUM_USER_ROLE;
+
+  password: string;
+};

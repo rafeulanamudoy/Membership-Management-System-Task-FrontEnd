@@ -1,24 +1,24 @@
 "use client";
 
-import { ISignUpData } from "@/app/types/Iuser";
+import { ISignInData } from "@/app/types/Iuser";
 
 import Input from "@/app/utilities/reactHookForm/Input";
 import Link from "next/link";
 import React from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SignUpSchema } from "@/app/lib/validation/YupValidation";
+import { SignInSchema } from "@/app/lib/validation/YupValidation";
 import { useForm } from "react-hook-form";
 import { Form } from "@/app/utilities/reactHookForm/Form";
-export default function AccountCreate() {
+export default function SignIn() {
   const {
     register,
     handleSubmit,
 
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(SignUpSchema) });
-  const onSubmit = async (userData: ISignUpData) => {
+  } = useForm({ resolver: yupResolver(SignInSchema) });
+  const onSubmit = async (userData: ISignInData) => {
     console.log(userData);
 
     reset();
@@ -28,7 +28,7 @@ export default function AccountCreate() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold mb-4     text-center  text-gray-800">
-          Sign Up
+          Sign In
         </h2>
         <Form
           handleSubmit={handleSubmit}
@@ -36,31 +36,6 @@ export default function AccountCreate() {
           register={register}
           className="space-y-4"
         >
-          <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              First Name
-            </label>
-            <Input
-              type="text"
-              name="name.firstName"
-              error={errors?.name?.firstName && errors.name?.firstName.message}
-              register={register}
-              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              Last Name
-            </label>
-            <Input
-              error={errors?.name?.lastName && errors.name?.lastName.message}
-              register={register}
-              name="name.lastName"
-              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
           <div>
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Email
@@ -87,30 +62,18 @@ export default function AccountCreate() {
               required
             />
           </div>
-          <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              Confirm Password
-            </label>
-            <Input
-              type="text"
-              error={errors.confirmPassword?.message}
-              register={register}
-              name="confirmPassword"
-              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
           >
-            Sign Up
+            Sign In
           </button>
         </Form>
         <p className="text-sm text-gray-600 mt-4 text-center">
-          Already have an account?{" "}
-          <Link href="/signIn" className="text-blue-500 hover:underline">
-            Login
+          Don,t have an account?{" "}
+          <Link href="/signUp" className="text-blue-500 hover:underline">
+            SignUp
           </Link>
         </p>
       </div>
