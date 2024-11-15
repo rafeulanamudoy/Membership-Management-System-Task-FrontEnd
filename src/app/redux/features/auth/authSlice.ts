@@ -13,16 +13,14 @@ const initialState: IUser = {
 };
 
 export const authSlice = createSlice({
-  name: "authReducer",
+  name: "auth", // Avoid "authReducer" to match state slice name
   initialState,
   reducers: {
     setUser: (state, { payload }: PayloadAction<IUser>) => {
-      state.user.email = payload.user.email;
-      state.user.role = payload.user.role;
-      state.user.name = payload.user.name;
+      state.user = payload.user; // Simplified for better clarity
     },
   },
 });
 
 export const { setUser } = authSlice.actions;
-export default authSlice.reducer;
+export default authSlice.reducer; // Export the reducer
