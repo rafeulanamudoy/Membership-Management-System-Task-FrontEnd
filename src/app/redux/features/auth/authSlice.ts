@@ -1,20 +1,6 @@
+import { ENUM_USER_ROLE, IUser } from "@/app/types/Iuser";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-enum ENUM_USER_ROLE {
-  ADMIN = "ADMIN",
-  TRAINER = "TRAINER",
-  TRAINEE = "TRAINEE",
-  DEFAULT = "",
-}
-type IUser = {
-  user: {
-    name: {
-      firstName: string;
-      lastName: string;
-    };
-    email: string;
-    role: ENUM_USER_ROLE;
-  };
-};
+
 const initialState: IUser = {
   user: {
     name: {

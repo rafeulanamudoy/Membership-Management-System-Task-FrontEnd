@@ -21,9 +21,8 @@ export interface IFormProps {
   id?: idType;
 }
 
-const Form: FC<IFormProps> = ({
+export const Form: FC<IFormProps> = ({
   defaultValues,
-
   children,
   onSubmit,
   handleSubmit,
@@ -32,9 +31,8 @@ const Form: FC<IFormProps> = ({
 }) => {
   return (
     <form
-      className=""
       autoComplete="off"
-      action={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit)} // Updated here
       {...rest}
     >
       {Array.isArray(children)
@@ -53,5 +51,3 @@ const Form: FC<IFormProps> = ({
     </form>
   );
 };
-
-export default Form;
