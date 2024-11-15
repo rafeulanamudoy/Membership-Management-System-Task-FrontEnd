@@ -14,7 +14,6 @@ const Header = React.memo(() => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { user } = useAppSelector((state) => state.auth);
-  console.log(user);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);

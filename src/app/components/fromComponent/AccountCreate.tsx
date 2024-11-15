@@ -1,6 +1,6 @@
 "use client";
 
-import { ISignUpData } from "@/app/types/Iuser";
+import { ENUM_USER_ROLE, ISignUpData } from "@/app/types/Iuser";
 
 import Input from "@/app/utilities/reactHookForm/Input";
 import Link from "next/link";
@@ -10,20 +10,56 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SignUpSchema } from "@/app/lib/validation/YupValidation";
 import { useForm } from "react-hook-form";
 import { Form } from "@/app/utilities/reactHookForm/Form";
+import { useSignUpMutation } from "@/app/redux/features/auth/authApi";
+
+import { useAppDispatch } from "@/app/redux/hooks";
+import { setUser } from "@/app/redux/features/auth/authSlice";
+import { showToast } from "@/app/utilities/ToastOptions";
 export default function AccountCreate() {
+  const [postUser] = useSignUpMutation();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
-
     reset,
+
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignUpSchema) });
   const onSubmit = async (userData: ISignUpData) => {
-    console.log(userData);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-    reset();
+    const submitData: ISignUpData = {
+      name: {
+        firstName: userData?.name?.firstName,
+        lastName: userData?.name?.lastName,
+      },
+      email: userData?.email,
+      password: userData?.password,
+      role: ENUM_USER_ROLE.TRAINEE,
+    };
+
+    try {
+      const payload = await postUser(submitData).unwrap();
+
+      // Dispatch user data and show success toast
+      dispatch(
+        setUser({
+          user: {
+            email: payload?.data?.email,
+            role: ENUM_USER_ROLE.TRAINEE,
+
+            name: payload?.data?.name,
+          },
+        })
+      );
+      showToast("success", payload?.message);
+      reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      showToast("error", error?.data?.message);
+    }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">

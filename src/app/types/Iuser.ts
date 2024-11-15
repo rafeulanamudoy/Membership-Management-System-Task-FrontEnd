@@ -1,7 +1,7 @@
 export enum ENUM_USER_ROLE {
-  ADMIN = "ADMIN",
-  TRAINER = "TRAINER",
-  TRAINEE = "TRAINEE",
+  ADMIN = "admin",
+  TRAINER = "trainer",
+  TRAINEE = "trainee",
   DEFAULT = "",
 }
 export type IUser = {
