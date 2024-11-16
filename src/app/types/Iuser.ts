@@ -21,6 +21,7 @@ export type ISignUpData = {
     firstName: string;
     lastName: string;
   };
+  _id?: string;
 
   email: string;
 
@@ -40,4 +41,20 @@ export type ISignInData = {
 };
 export type UserResponseData = {
   accessToken: string;
+};
+export type IUserSchemaData = {
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  _id: string;
+
+  email: string;
+
+  role: ENUM_USER_ROLE;
+
+  password: string;
+
+  confirmPassword?: string;
+  secret_key?: string;
 };

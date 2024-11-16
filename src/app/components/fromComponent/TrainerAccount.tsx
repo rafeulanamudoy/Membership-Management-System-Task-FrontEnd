@@ -50,9 +50,9 @@ export default function TrainerAccount() {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-4     text-center  text-gray-800">
+        <h2 className="text-3xl font-extrabold text-center text-blue-600 mb-6">
           Trainer Account
         </h2>
         <Form
@@ -127,7 +127,7 @@ export default function TrainerAccount() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium text-lg hover:bg-blue-700 transition duration-300 shadow-md"
           >
             Sign Up
           </button>

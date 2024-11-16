@@ -9,6 +9,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: [{ type: "Trainer", id: "LIST" }],
     }),
     adminSignUp: build.mutation({
       query: (data: ISignUpData) => ({

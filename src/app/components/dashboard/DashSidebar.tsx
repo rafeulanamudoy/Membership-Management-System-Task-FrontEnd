@@ -64,13 +64,19 @@ export default function DashSideBar({ role }: SidebarProps) {
         icon: faUserPlus,
       },
       {
-        title: "ManageTrainer",
-        url: "/dashboard/admin/manageTrainer",
-        icon: faChalkboardTeacher,
+        title: "Manage Trainers",
+        url: "/dashboard/admin/trainers",
+        icon: faCalendarAlt,
       },
       {
-        title: "Manage Class Schedule",
+        title: "Class Schedule",
         url: "/dashboard/admin/classSchedule",
+        icon: faCalendarAlt,
+      },
+
+      {
+        title: "Create  Class Schedule",
+        url: "/dashboard/admin/createSchedule",
         icon: faCalendarAlt,
       },
     ],
