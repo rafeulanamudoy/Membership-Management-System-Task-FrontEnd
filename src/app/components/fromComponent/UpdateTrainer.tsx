@@ -28,14 +28,13 @@ export default function UpdateTrainer({ id }: props) {
   } = useForm({ resolver: yupResolver(UpdatTrainerScema) });
   const onSubmit = async (userData: ISignUpData) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    console.log(userData);
+
     try {
       const payload = await updateTrainer({ id, data: userData }).unwrap();
       showToast("success", payload?.message);
       router.push("/dashboard/admin/trainers");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
       showToast("error", error?.data?.message);
     }
   };

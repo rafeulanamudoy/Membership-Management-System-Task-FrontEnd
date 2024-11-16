@@ -33,7 +33,7 @@ type SidebarProps = {
 export default function DashSideBar({ role }: SidebarProps) {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
-  console.log(toggle);
+
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
   const commonSidebarItems: SidebarItem[] = [];

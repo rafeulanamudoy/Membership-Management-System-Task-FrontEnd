@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Live Project
 
-## Getting Started
+You can visit the live project here: [Fitness Manager Live](https://tour-share-front-end.vercel.app)
 
-First, run the development server:
+## Fitness Manager
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Features:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Authentication
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Integrate JWT-based authentication for secure access.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Role-based Access**: The platform supports three user roles with different levels of access:
+  - **Admin**
+  - **Trainer**
+  - **Trainee**
 
-## Learn More
+## User Roles and Access
 
-To learn more about Next.js, take a look at the following resources:
+Fitness Manager have three distinct user roles with different levels of access and permissions:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Admin**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Admin can create Trainer
+     -Admin can add,update and delete trainers
+     -Admin can create class and schedule it as 5 max schedule class and 2 hour class.
 
-## Deploy on Vercel
+   - To create a Admin account, visit this link: [Create Admin Account](https://tour-share-front-end.vercel.app/signUp). and also when create account must have provide the Secret Key.and the secret key is **super-secret-key**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Trainer**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - trainer can see his class shedule
+
+3. **Trainee**:
+
+   - Trainee can see which classes he booked
+   - Trainee can book class schdule
+
+## relavent Features
+
+- maximum of 5 class schedules
+- The system enforces a maximum of 10 trainees per class schedule
+
+## Routes Details
+
+# Admin Api EndPoint
+
+#### Create Admin Account:ttps://membership-management-system-backend.vercel.app/api/v1/admin/signUp (Post)
+
+#### Create Trainer Account:ttps://membership-management-system-backend.vercel.app/api/v1/admin/trainers (Post)
+
+#### Get Trainers :ttps://membership-management-system-backend.vercel.app/api/v1/admin/trainers (Get)
+
+#### Update Trainers:ttps://membership-management-system-backend.vercel.app/api/v1/admin/trainers/:id (Patch)
+
+#### Delete Trainers:ttps://membership-management-system-backend.vercel.app/api/v1/admin/trainers/:id (delete)
+
+#### Create Class :ttps://membership-management-system-backend.vercel.app/api/v1/admin/createClass (Post)
+
+#### Get Class :ttps://membership-management-system-backend.vercel.app/api/v1/admin/getClass (Get)
+
+#### Get Single Trainer :ttps://membership-management-system-backend.vercel.app/api/v1/admin/trainer/:id (Get)
+
+# Trainee Api EndPoint
+
+#### Book Class :ttps://membership-management-system-backend.vercel.app/api/v1/trainee/book/:id (Patch)
+
+#### View Class:ttps://membership-management-system-backend.vercel.app/api/v1/trainee/view/:id (Get)
+
+# Trainer Api EndPoint
+
+#### Get Trainer Schedule Class :ttps://membership-management-system-backend.vercel.app/api/v1/trainer/:id (Get)
+
+# Auth Api EndPoint
+
+#### Trainee Account :https://membership-management-system-backend.vercel.app/account/signUp (Post)
+
+### User Login :https://membership-management-system-backend.vercel.app/account/signIn (Post)
+
+### Update User :https://membership-management-system-backend.vercel.app/account/:id (Patch)
+
+### Get Single User By Email :https://membership-management-system-backend.vercel.app/account/:email (get)

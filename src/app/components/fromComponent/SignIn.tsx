@@ -33,12 +33,11 @@ export default function SignIn() {
     const { role, ...others } = userData;
     try {
       const payload = await signIn(others).unwrap();
-      console.log(payload, "check payload");
+
       const user = await setCookieAndVerify(
         "accessToken",
         payload?.data?.accessToken
       );
-      console.log(user, "check user from decoded");
 
       dispatch(
         setUser({
@@ -54,7 +53,6 @@ export default function SignIn() {
       reset();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
       showToast("error", error?.data?.message);
     }
 

@@ -9,7 +9,7 @@ export default async function BaseLayout({
   children: React.ReactNode;
 }) {
   const user = (await decodeUserCookie("accessToken")) || null;
-  console.log(user, "check user");
+
   return (
     <section>
       <Header user={user} />

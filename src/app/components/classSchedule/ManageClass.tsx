@@ -8,7 +8,6 @@ import { formatDate, formatTime } from "@/app/utilities/FormatDataString";
 export default function ManageClass() {
   const { data, isLoading } = useGetClassesQuery(undefined);
 
-  console.log(data);
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
 
   // If there's no data, show a message

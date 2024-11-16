@@ -26,14 +26,13 @@ export default function UpdateUser({ id }: props) {
   } = useForm({ resolver: yupResolver(UpdateUserSchema) });
   const onSubmit = async (userData: ISignUpData) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    console.log(userData);
+
     try {
       const payload = await updateUser({ id, data: userData }).unwrap();
       showToast("success", payload?.message);
       router.push("/dashboard/trainee/profile");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
       showToast("error", error?.data?.message);
     }
   };

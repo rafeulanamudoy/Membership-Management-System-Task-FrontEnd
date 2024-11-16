@@ -14,7 +14,7 @@ export default function BookClass({ traineeId }: props) {
   const { data, isLoading } = useGetClassesQuery(undefined);
   const [bookClass] = useBookClassMutation();
   const router = useRouter();
-  console.log(data);
+
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
 
   // If there's no data, show a message
