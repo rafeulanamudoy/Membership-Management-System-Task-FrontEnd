@@ -10,7 +10,7 @@ export const classApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Class"],
+      invalidatesTags: [{ type: "Class", id: "LIST" }],
     }),
     adminSignUp: build.mutation({
       query: (data: ISignUpData) => ({
@@ -26,7 +26,13 @@ export const classApi = baseApi.injectEndpoints({
         url: "/admin/getClass",
         method: "GET",
       }),
-      providesTags: ["Class"],
+      providesTags: (result) =>
+        result
+          ? [
+              { type: "Trainee", id: "LIST" },
+              { type: "Class", id: "LIST" },
+            ]
+          : [],
     }),
   }),
 });

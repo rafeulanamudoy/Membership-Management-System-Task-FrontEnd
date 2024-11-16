@@ -37,20 +37,20 @@ export default function DashSideBar({ role }: SidebarProps) {
   console.log(toggle);
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
-  const commonSidebarItems: SidebarItem[] = [
-    { title: "Profile", url: "/dashboard/profile", icon: faUser },
-  ];
+  const commonSidebarItems: SidebarItem[] = [];
 
   // Define role-specific sidebar items
   const roleSpecificSidebarItems: Partial<
     Record<ENUM_USER_ROLE, SidebarItem[]>
   > = {
     [ENUM_USER_ROLE.TRAINEE]: [
+      { title: "Profile", url: "/dashboard/trainee/profile", icon: faUser },
       {
         title: "Booking Class",
-        url: "/dashboard/trainee/booking",
+        url: "/dashboard/trainee/bookingClass",
         icon: faCalendarCheck,
       },
+
       {
         title: "View Class",
         url: "/dashboard/trainee/viewClass",

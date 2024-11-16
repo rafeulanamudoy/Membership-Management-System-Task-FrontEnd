@@ -63,3 +63,9 @@ export const UpdatTrainerScema = yup.object().shape({
     .oneOf(Object.values(ENUM_USER_ROLE), "Role is required and must be valid")
     .required("Role is required"),
 });
+export const UpdateUserSchema = yup.object().shape({
+  name: yup.object().shape({
+    firstName: yup.string().required("First Name is required"),
+    lastName: yup.string().required("Last Name is required"),
+  }),
+});

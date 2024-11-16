@@ -25,8 +25,28 @@ export const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    updateUser: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/account/${id}`,
+        method: "PATCH",
+        body: data, // Payload containing fields to update
+      }),
+      invalidatesTags: [{ type: "User", id: "LIST" }],
+    }),
+    getSingleUser: build.query({
+      query: (email) => ({
+        url: `account/${email}`,
+        method: "GET",
+      }),
+      // Invalidate the cache when a trainer is deleted
+    }),
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useAdminSignUpMutation } =
-  authApi;
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useAdminSignUpMutation,
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
+} = authApi;

@@ -8,13 +8,13 @@ export const trainerApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: (result) =>
-        result ? [{ type: "Trainer", id: "LIST" }] : [], // Using a single list tag
+        result ? [{ type: "Trainer", id: "LIST" }] : [],
     }),
     updateTrainer: build.mutation({
       query: ({ id, data }) => ({
         url: `admin/trainers/${id}`,
         method: "PATCH",
-        body: data, // Payload containing fields to update
+        body: data,
       }),
       invalidatesTags: [{ type: "Trainer", id: "LIST" }],
     }),
@@ -23,7 +23,7 @@ export const trainerApi = baseApi.injectEndpoints({
         url: `admin/trainers/${id}`,
         method: "DELETE",
       }),
-      // Invalidate the cache when a trainer is deleted
+
       invalidatesTags: [{ type: "Trainer", id: "LIST" }],
     }),
     getSingleTainer: build.query({
@@ -31,7 +31,6 @@ export const trainerApi = baseApi.injectEndpoints({
         url: `admin/trainer/${id}`,
         method: "GET",
       }),
-      // Invalidate the cache when a trainer is deleted
     }),
   }),
 });
