@@ -1,4 +1,6 @@
 import { decodeUserCookie } from "../lib/actions/cookies";
+
+import Footer from "../shared/Footer";
 import Header from "../shared/Header";
 
 export default async function BaseLayout({
@@ -13,6 +15,7 @@ export default async function BaseLayout({
       <Header user={user} />
 
       {children}
+      <Footer />
     </section>
   );
 }

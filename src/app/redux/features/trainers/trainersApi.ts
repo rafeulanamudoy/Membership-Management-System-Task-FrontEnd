@@ -32,6 +32,12 @@ export const trainerApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getTrainerClass: build.query({
+      query: (id) => ({
+        url: `/trainer/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -40,4 +46,5 @@ export const {
   useUpdateTrainerMutation,
   useDeleteTrainerMutation,
   useGetSingleTainerQuery,
+  useGetTrainerClassQuery,
 } = trainerApi;

@@ -10,7 +10,6 @@ import {
   faCircleXmark,
   IconDefinition,
   faCalendarAlt,
-  faChalkboardTeacher,
   faUserPlus,
   faCalendarCheck,
   faListAlt,
@@ -86,11 +85,6 @@ export default function DashSideBar({ role }: SidebarProps) {
         url: "/dashboard/trainer/classes",
         icon: faClipboardList,
       },
-      {
-        title: "Manage Classes",
-        url: "/dashboard/trainer/manageClasses",
-        icon: faChalkboardTeacher,
-      },
     ],
   };
 
@@ -103,7 +97,7 @@ export default function DashSideBar({ role }: SidebarProps) {
     <div
       className={`${
         toggle ? "w-80 md:w-24" : "md:w-80 text-[#31363F] hidden lg:block"
-      } border-2 md:relative absolute bg-white`}
+      } md:relative absolute bg-white`}
     >
       <div className="flex justify-end p-5 md:hidden">
         <button>
