@@ -7,25 +7,23 @@ import Link from "next/link";
 import React from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AdminSchema } from "@/app/lib/validation/YupValidation";
+import { SignUpSchema } from "@/app/lib/validation/YupValidation";
 import { useForm } from "react-hook-form";
 import { Form } from "@/app/utilities/reactHookForm/Form";
-import { useAdminSignUpMutation } from "@/app/redux/features/auth/authApi";
+import { useSignUpMutation } from "@/app/redux/features/auth/authApi";
 
-import { useAppDispatch } from "@/app/redux/hooks";
-import { setUser } from "@/app/redux/features/auth/authSlice";
 import { showToast } from "@/app/utilities/ToastOptions";
-import { setCookieAndVerify } from "@/app/lib/actions/cookies";
-export default function AdminAccountCreate() {
-  const [postUser] = useAdminSignUpMutation();
-  const dispatch = useAppDispatch();
+
+export default function TrainerAccount() {
+  const [postUser] = useSignUpMutation();
+
   const {
     register,
     handleSubmit,
     reset,
 
     formState: { errors },
-  } = useForm({ resolver: yupResolver(AdminSchema) });
+  } = useForm({ resolver: yupResolver(SignUpSchema) });
   const onSubmit = async (userData: ISignUpData) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
@@ -36,29 +34,14 @@ export default function AdminAccountCreate() {
       },
       email: userData?.email,
       password: userData?.password,
-      role: ENUM_USER_ROLE.ADMIN,
-      secret_key: userData.secret_key,
+      role: ENUM_USER_ROLE.TRAINER,
     };
 
     try {
       const payload = await postUser(submitData).unwrap();
 
-      // Dispatch user data and show success toast
-      const user = await setCookieAndVerify(
-        "accessToken",
-        payload?.data?.accessToken
-      );
-      console.log(user, "check user from decoded");
-
-      dispatch(
-        setUser({
-          user: {
-            email: user?.userEmail,
-            role: user?.role,
-          },
-        })
-      );
       showToast("success", payload?.message);
+
       reset();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -70,7 +53,7 @@ export default function AdminAccountCreate() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold mb-4     text-center  text-gray-800">
-          Admin Account
+          Trainer Account
         </h2>
         <Form
           handleSubmit={handleSubmit}
@@ -138,19 +121,6 @@ export default function AdminAccountCreate() {
               error={errors.confirmPassword?.message}
               register={register}
               name="confirmPassword"
-              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              Secret Key
-            </label>
-            <Input
-              type="text"
-              error={errors.confirmPassword?.message}
-              register={register}
-              name="secret_key"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />

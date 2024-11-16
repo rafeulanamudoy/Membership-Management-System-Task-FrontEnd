@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -11,19 +11,24 @@ import {
 
 import { UserPayload } from "../types/Iuser";
 import { useRemoveAccount } from "../hooks/user";
+
 interface HeaderProps {
   user: UserPayload | null;
 }
+// const LazyDashModal = dynamic(
+//   () => import("../components/dashboard/DashBoardModal")
+// );
 const Header = React.memo(({ user }: HeaderProps) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handlelogout = useRemoveAccount();
-
+  const headerRef = useRef<HTMLDivElement>(null);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
     <div
+      ref={headerRef}
       className={` w-full  grid md:flex md:justify-evenly   items-center 2xl:text-[20px]  xl:text-md text-[10px] uppercase bg-black text-white`}
     >
       <nav
@@ -61,6 +66,9 @@ const Header = React.memo(({ user }: HeaderProps) => {
             >
               sign out
             </button>
+            <Link href={"/dashboard"} className="uppercase block my-5 md:my-0">
+              Dashboard
+            </Link>
           </div>
         ) : (
           <div
