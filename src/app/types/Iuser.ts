@@ -10,6 +10,12 @@ export type IUser = {
     role: ENUM_USER_ROLE;
   };
 };
+export type UserPayload = {
+  email: string;
+  role: ENUM_USER_ROLE;
+  _id: string;
+};
+
 export type ISignUpData = {
   name: {
     firstName: string;

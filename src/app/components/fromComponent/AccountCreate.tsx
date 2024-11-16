@@ -15,9 +15,13 @@ import { useSignUpMutation } from "@/app/redux/features/auth/authApi";
 import { useAppDispatch } from "@/app/redux/hooks";
 import { setUser } from "@/app/redux/features/auth/authSlice";
 import { showToast } from "@/app/utilities/ToastOptions";
+import { setCookieAndVerify } from "@/app/lib/actions/cookies";
+import { useRouter } from "next/navigation";
+
 export default function AccountCreate() {
   const [postUser] = useSignUpMutation();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -41,16 +45,22 @@ export default function AccountCreate() {
     try {
       const payload = await postUser(submitData).unwrap();
 
-      // Dispatch user data and show success toast
+      const user = await setCookieAndVerify(
+        "accessToken",
+        payload?.data?.accessToken
+      );
+      console.log(user, "check user from decoded");
+
       dispatch(
         setUser({
           user: {
-            email: payload?.data?.email,
-            role: ENUM_USER_ROLE.TRAINEE,
+            email: user?.userEmail,
+            role: user?.role,
           },
         })
       );
       showToast("success", payload?.message);
+      router.push("/");
       reset();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

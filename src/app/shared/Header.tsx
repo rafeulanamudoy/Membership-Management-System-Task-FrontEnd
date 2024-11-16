@@ -8,12 +8,15 @@ import {
   faRightFromBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAppSelector } from "../redux/hooks";
 
-const Header = React.memo(() => {
+import { UserPayload } from "../types/Iuser";
+import { useRemoveAccount } from "../hooks/user";
+interface HeaderProps {
+  user: UserPayload | null;
+}
+const Header = React.memo(({ user }: HeaderProps) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const { user } = useAppSelector((state) => state.auth);
+  const handlelogout = useRemoveAccount();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -52,7 +55,12 @@ const Header = React.memo(() => {
       >
         {user?.email ? (
           <div className="md:flex gap-x-5 h-16 items-center mb-5 md:mb-0">
-            <button className="uppercase block my-5 md:my-0">sign out</button>
+            <button
+              onClick={handlelogout}
+              className="uppercase block my-5 md:my-0"
+            >
+              sign out
+            </button>
           </div>
         ) : (
           <div
