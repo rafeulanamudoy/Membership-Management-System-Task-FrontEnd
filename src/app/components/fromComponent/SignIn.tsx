@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { ISignInData } from "@/app/types/Iuser";
@@ -10,7 +11,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SignInSchema } from "@/app/lib/validation/YupValidation";
 import { useForm } from "react-hook-form";
 import { Form } from "@/app/utilities/reactHookForm/Form";
+import { useSignInMutation } from "@/app/redux/features/auth/authApi";
+import { useAppDispatch } from "@/app/redux/hooks";
+import { setUser } from "@/app/redux/features/auth/authSlice";
+import { showToast } from "@/app/utilities/ToastOptions";
+import { verifyToken } from "@/app/lib/actions/user";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 export default function SignIn() {
+  const [signIn] = useSignInMutation();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -19,7 +28,33 @@ export default function SignIn() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignInSchema) });
   const onSubmit = async (userData: ISignInData) => {
-    console.log(userData);
+    const { role, ...others } = userData;
+    try {
+      const payload = await signIn(others).unwrap();
+      const { accessToken } = payload?.data;
+      console.log(accessToken, "accesstoken check");
+      // Dispatch user data and show success toast
+      const decoded = jwtDecode(accessToken);
+      console.log(decoded, "decoded data");
+      // Dispatch user data to Redux
+      // dispatch(
+      //   setUser({
+      //     user: {
+      //       email: userData.email,
+      //       role: decodedToken.role || ENUM_USER_ROLE.TRAINEE,
+      //     },
+      //   })
+      // );
+
+      // Save the token in cookies for persistence
+
+      showToast("success", payload?.message);
+      reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      showToast("error", error?.data?.message);
+    }
 
     reset();
   };

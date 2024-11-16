@@ -7,16 +7,16 @@ import Link from "next/link";
 import React from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SignUpSchema } from "@/app/lib/validation/YupValidation";
+import { AdminSchema } from "@/app/lib/validation/YupValidation";
 import { useForm } from "react-hook-form";
 import { Form } from "@/app/utilities/reactHookForm/Form";
-import { useSignUpMutation } from "@/app/redux/features/auth/authApi";
+import { useAdminSignUpMutation } from "@/app/redux/features/auth/authApi";
 
 import { useAppDispatch } from "@/app/redux/hooks";
 import { setUser } from "@/app/redux/features/auth/authSlice";
 import { showToast } from "@/app/utilities/ToastOptions";
-export default function AccountCreate() {
-  const [postUser] = useSignUpMutation();
+export default function AdminAccountCreate() {
+  const [postUser] = useAdminSignUpMutation();
   const dispatch = useAppDispatch();
   const {
     register,
@@ -24,7 +24,7 @@ export default function AccountCreate() {
     reset,
 
     formState: { errors },
-  } = useForm({ resolver: yupResolver(SignUpSchema) });
+  } = useForm({ resolver: yupResolver(AdminSchema) });
   const onSubmit = async (userData: ISignUpData) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
@@ -35,7 +35,8 @@ export default function AccountCreate() {
       },
       email: userData?.email,
       password: userData?.password,
-      role: ENUM_USER_ROLE.TRAINEE,
+      role: ENUM_USER_ROLE.ADMIN,
+      secret_key: userData.secret_key,
     };
 
     try {
@@ -46,7 +47,7 @@ export default function AccountCreate() {
         setUser({
           user: {
             email: payload?.data?.email,
-            role: ENUM_USER_ROLE.TRAINEE,
+            role: ENUM_USER_ROLE.ADMIN,
           },
         })
       );
@@ -62,7 +63,7 @@ export default function AccountCreate() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold mb-4     text-center  text-gray-800">
-          Sign Up
+          Admin Account
         </h2>
         <Form
           handleSubmit={handleSubmit}
@@ -130,6 +131,19 @@ export default function AccountCreate() {
               error={errors.confirmPassword?.message}
               register={register}
               name="confirmPassword"
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 text-sm font-medium mb-1">
+              Secret Key
+            </label>
+            <Input
+              type="text"
+              error={errors.confirmPassword?.message}
+              register={register}
+              name="secret_key"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />

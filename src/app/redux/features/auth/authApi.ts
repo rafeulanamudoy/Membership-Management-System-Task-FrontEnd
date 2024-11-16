@@ -10,6 +10,13 @@ export const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    adminSignUp: build.mutation({
+      query: (data: ISignUpData) => ({
+        url: "/admin/signUp",
+        method: "POST",
+        body: data,
+      }),
+    }),
     SignIn: build.mutation({
       query: (data: ISignInData) => ({
         url: "/account/signin",
@@ -20,4 +27,5 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation } = authApi;
+export const { useSignUpMutation, useSignInMutation, useAdminSignUpMutation } =
+  authApi;

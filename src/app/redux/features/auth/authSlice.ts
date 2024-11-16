@@ -3,10 +3,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: IUser = {
   user: {
-    name: {
-      firstName: "",
-      lastName: "",
-    },
     email: "",
     role: ENUM_USER_ROLE.DEFAULT,
   },

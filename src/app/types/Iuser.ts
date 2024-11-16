@@ -6,10 +6,6 @@ export enum ENUM_USER_ROLE {
 }
 export type IUser = {
   user: {
-    name: {
-      firstName: string;
-      lastName: string;
-    };
     email: string;
     role: ENUM_USER_ROLE;
   };
@@ -27,11 +23,15 @@ export type ISignUpData = {
   password: string;
 
   confirmPassword?: string;
+  secret_key?: string;
 };
 export type ISignInData = {
   email: string;
 
-  role: ENUM_USER_ROLE;
+  role?: ENUM_USER_ROLE;
 
   password: string;
+};
+export type UserResponseData = {
+  accessToken: string;
 };
